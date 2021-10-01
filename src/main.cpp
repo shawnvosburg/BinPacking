@@ -67,6 +67,7 @@ int main(int argc, const char** argv) {
             generateursEntrees.push_back(new GenerateurAlternant(Npair.first));
 
     // 2.3 Créer N items GrosPetit (N/2 x =0.5 + eps et ensuite N/2 x = 0.5 - eps)
+    //     Alors M = N/2.
     for(auto Npair: NList)
         for(int i=0; i<Npair.second; i++)
             generateursEntrees.push_back(new GenerateurGrosPetit(Npair.first));
