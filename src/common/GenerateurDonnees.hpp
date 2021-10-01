@@ -107,12 +107,12 @@ std::vector<float> GenerateurGrosPetit::getDonnees()
     std::vector<float> donnees;
     for(int j = 0; j < this->N / 2; j++) 
     {
-        float num = 0.5 + std::numeric_limits<float>::epsilon();
+        float num = 0.5 - std::numeric_limits<float>::epsilon();
         donnees.push_back(num);
     }
     for(int j = N/2; j < this->N; j++) 
     {
-        float num = 0.5 - 2 * std::numeric_limits<float>::epsilon();
+        float num =  3 * std::numeric_limits<float>::epsilon();
         donnees.push_back(num);
     }
     return donnees;
