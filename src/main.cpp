@@ -66,20 +66,10 @@ int main(int argc, const char** argv) {
         for(int i=0; i<Npair.second; i++)
             generateursEntrees.push_back(new GenerateurAlternant(Npair.first));
 
-    // 2.3 Créer N items GrosPetit (N/2 x >=0.5 et ensuite N/2 x <0.5)
+    // 2.3 Créer N items GrosPetit (N/2 x =0.5 + eps et ensuite N/2 x = 0.5 - eps)
     for(auto Npair: NList)
         for(int i=0; i<Npair.second; i++)
             generateursEntrees.push_back(new GenerateurGrosPetit(Npair.first));
-
-    // 2.4 Créer N items PetitGros (N/2 x <0.5 et ensuite N/2 x >=0.5)
-    for(auto Npair: NList)
-        for(int i=0; i<Npair.second; i++)
-            generateursEntrees.push_back(new GenerateurPetitGros(Npair.first));     
-
-    // 2.5 Créer N items QuatuorOptimum (3 x <= 0.25 et ensuite 4ieme = 1 - les trois chiifres)
-    for(auto Npair: NList)
-        for(int i=0; i<Npair.second; i++)
-            generateursEntrees.push_back(new GenerateurQuatuorOptimum(Npair.first));    
 
     // 2.6 Créer N items DuoOptimum (1 x aléatoireet ensuite 2ieme = 1 - le premier chiffre)
     for(auto Npair: NList)

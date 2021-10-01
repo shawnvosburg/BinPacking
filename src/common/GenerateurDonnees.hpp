@@ -107,44 +107,12 @@ std::vector<float> GenerateurGrosPetit::getDonnees()
     std::vector<float> donnees;
     for(int j = 0; j < this->N / 2; j++) 
     {
-        float num = (getRandomFloat() +1 )/2;
+        float num = 0.5 + std::numeric_limits<float>::epsilon();
         donnees.push_back(num);
     }
     for(int j = N/2; j < this->N; j++) 
     {
-        float num = getRandomFloat() /2;
-        donnees.push_back(num);
-    }
-    return donnees;
-}
-
-/*  ==================================================================================
-            Données PetitGros (N/2 < 0.5 ensuite N/2 >= 0.5) 
-    ==================================================================================
-*/
-class GenerateurPetitGros: public BaseGenerateur
-{
-private:
-    /* data */
-public:
-    GenerateurPetitGros ()                         {this->nom = "PetitGros";};
-    GenerateurPetitGros (int N): BaseGenerateur(N) {this->nom = "PetitGros";};
-    ~GenerateurPetitGros();
-
-    std::vector<float> getDonnees();
-};
-
-std::vector<float> GenerateurPetitGros::getDonnees()
-{
-    std::vector<float> donnees;
-    for(int j = 0; j < this->N / 2; j++) 
-    {
-        float num = getRandomFloat() /2;
-        donnees.push_back(num);
-    }
-    for(int j = N/2; j < this->N; j++) 
-    {
-        float num = (getRandomFloat() +1) /2;
+        float num = 0.5 - std::numeric_limits<float>::epsilon();
         donnees.push_back(num);
     }
     return donnees;
@@ -179,44 +147,6 @@ std::vector<float> GenerateurDuoOptimum::getDonnees()
     }
 
     // On mélange les données pour que les 2 chiffres connectés ne sont pas immédiatement à coté.
-    std::random_shuffle(donnees.begin(), donnees.end());
-
-    return donnees;
-}
-
-/*  =============================================================================================================
-            Données QuatuorOptimum (3 chiffres aléatoires, et le 4ieme = 1 - les 3 chiffres) 
-            L'optimum devient alors M = N/4 nombres de conteneurs
-    =============================================================================================================
-*/
-class GenerateurQuatuorOptimum: public BaseGenerateur
-{
-private:
-    /* data */
-public:
-    GenerateurQuatuorOptimum ()                         {this->nom = "QuatuorOptimum";};
-    GenerateurQuatuorOptimum (int N): BaseGenerateur(N) {this->nom = "QuatuorOptimum";};
-    ~GenerateurQuatuorOptimum();
-
-    std::vector<float> getDonnees();
-};
-
-std::vector<float> GenerateurQuatuorOptimum::getDonnees()
-{
-    std::vector<float> donnees;
-    for(int j = 0; j < this->N / 4; j++) 
-    {
-        float num1 = getRandomFloat() / 4;
-        float num2 = getRandomFloat() / 4;
-        float num3 = getRandomFloat() / 4;
-        float num4 = 1 - num1 - num2 - num3;
-        donnees.push_back(num1);
-        donnees.push_back(num2);
-        donnees.push_back(num3);
-        donnees.push_back(num4);
-    }
-
-    // On mélange les données pour que les 4 chiffres connectés ne sont pas immédiatement à coté.
     std::random_shuffle(donnees.begin(), donnees.end());
 
     return donnees;
