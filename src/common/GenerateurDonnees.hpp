@@ -88,7 +88,7 @@ std::vector<float> GenerateurAlternant::getDonnees()
 
 
 /*  ==================================================================================
-            Données GrosPetit (N/2 >= 0.5 ensuite N/2 < 0.5) 
+            Données GrosPetit (N/2 = 0.5 + eps ensuite N/2 = 0.5 - 2 * eps) 
     ==================================================================================
 */
 class GenerateurGrosPetit: public BaseGenerateur
@@ -112,7 +112,7 @@ std::vector<float> GenerateurGrosPetit::getDonnees()
     }
     for(int j = N/2; j < this->N; j++) 
     {
-        float num = 0.5 - std::numeric_limits<float>::epsilon();
+        float num = 0.5 - 2 * std::numeric_limits<float>::epsilon();
         donnees.push_back(num);
     }
     return donnees;
