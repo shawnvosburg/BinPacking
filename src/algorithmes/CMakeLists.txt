@@ -11,6 +11,8 @@ ${CMAKE_CURRENT_SOURCE_DIR}/FirstFitDecreasing.hpp
 ${CMAKE_CURRENT_SOURCE_DIR}/FirstFitDecreasing.cpp
 ${CMAKE_CURRENT_SOURCE_DIR}/BestFitDecreasing.hpp
 ${CMAKE_CURRENT_SOURCE_DIR}/BestFitDecreasing.cpp
+${CMAKE_CURRENT_SOURCE_DIR}/NextFitDecreasing.hpp
+${CMAKE_CURRENT_SOURCE_DIR}/NextFitDecreasing.cpp
 
 ${CMAKE_CURRENT_SOURCE_DIR}/algorithmes.hpp
 )

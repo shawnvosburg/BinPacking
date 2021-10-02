@@ -5,3 +5,4 @@
 #include "BestFit.hpp"
 #include "FirstFitDecreasing.hpp"
 #include "BestFitDecreasing.hpp"
+#include "NextFitDecreasing.hpp"

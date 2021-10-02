@@ -7,7 +7,10 @@
 
 bool compareFloat(float a, float b )
 {
-    return (a - b) < FLT_EPSILON || (b - a) < FLT_EPSILON;
+    if ((a-b) > 0)
+        return (a - b) < std::numeric_limits<float>::epsilon();
+    else 
+        return (b - a) < std::numeric_limits<float>::epsilon();
 }
 
 TEST_CASE("10 items > 0.5")
@@ -39,6 +42,11 @@ TEST_CASE("10 items > 0.5")
     SECTION("Best Fit Decreasing")
     {
         algo = new BestFitDecreasing();
+        estInverse = true;
+    }
+    SECTION("Next Fit Decreasing")
+    {
+        algo = new NextFitDecreasing();
         estInverse = true;
     }
 
@@ -119,7 +127,7 @@ TEST_CASE("Algorithmes fonctionnent correctement")
         algo->faireBinpacking(sortie, items);    
 
         // Verification de la sortie
-        std::vector<float> expected = {0.9,1.0,0.7};
+        std::vector<float> expected = {0.9,1.0,0.65};
         for(int i = 0; i < expected.size(); i++)
         {
             REQUIRE(compareFloat(sortie[i]->getTotal(), expected[i]));
@@ -134,6 +142,20 @@ TEST_CASE("Algorithmes fonctionnent correctement")
 
         // Verification de la sortie
         std::vector<float> expected = {1.0,0.9,0.65};
+        for(int i = 0; i < expected.size(); i++)
+        {
+            REQUIRE(compareFloat(sortie[i]->getTotal(), expected[i]));
+        }     
+    }
+    SECTION("Next Fit Decreasing")
+    {
+        algo = new NextFitDecreasing();
+
+        // Execution de l'algorithme
+        algo->faireBinpacking(sortie, items);
+
+        // Verification de la sortie
+        std::vector<float> expected = {0.85,0.7,1.0 };
         for(int i = 0; i < expected.size(); i++)
         {
             REQUIRE(compareFloat(sortie[i]->getTotal(), expected[i]));

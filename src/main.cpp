@@ -47,6 +47,7 @@ int main(int argc, const char** argv) {
     algoList.push_back(new NextFit());
     algoList.push_back(new BestFit());
     algoList.push_back(new FirstFitDecreasing());
+    algoList.push_back(new NextFitDecreasing());
     algoList.push_back(new BestFitDecreasing());
     
     /*
@@ -54,38 +55,27 @@ int main(int argc, const char** argv) {
     */
     std::vector<BaseGenerateur*> generateursEntrees;
     // Generation de <N items, I listes d'items differents>
-    std::vector<std::pair<int,int>> NList = {{10, 100000},{100,10000},{1000,1000},{10000,100},{100000,10}};
+    std::vector<std::pair<int,int>> NList = {{180, 10000},{1800,1000},{18000,100},{180000,10}};
 
     // 2.1 Créer N items aléatoirement
     for(auto Npair: NList)
         for(int i=0; i<Npair.second; i++)
             generateursEntrees.push_back(new GenerateurAleatoire(Npair.first));
 
-    // 2.2 Créer N items alternant (>=0.5 et ensuite <0.5)
+    // 2.2 Créer N items pour le pire cas de FirstFit
     for(auto Npair: NList)
-        for(int i=0; i<Npair.second; i++)
-            generateursEntrees.push_back(new GenerateurAlternant(Npair.first));
+            generateursEntrees.push_back(new GenerateurFFWC(Npair.first));
 
-    // 2.3 Créer N items GrosPetit (N/2 x =0.5 + eps et ensuite N/2 x = 0.5 - eps)
-    //     Alors M = N/2.
+    // 2.3 Créer N items pour le pire cas de FirstFit
     for(auto Npair: NList)
-        for(int i=0; i<Npair.second; i++)
-            generateursEntrees.push_back(new GenerateurGrosPetit(Npair.first));
+            generateursEntrees.push_back(new GenerateurNFWC(Npair.first));
 
-    // 2.6 Créer N items DuoOptimum (1 x aléatoireet ensuite 2ieme = 1 - le premier chiffre)
+    // 2.4 Créer N items pour le pire cas de FirstFitDecreasing
     for(auto Npair: NList)
         for(int i=0; i<Npair.second; i++)
-            generateursEntrees.push_back(new GenerateurDuoOptimum(Npair.first));  
+            generateursEntrees.push_back(new GenerateurFFDWC(Npair.first));
 
-    // 2.7 Créer N items Augmentant (chiffres augmenent de 0 à 1)
-    for(auto Npair: NList)
-        for(int i=0; i<Npair.second; i++)
-            generateursEntrees.push_back(new GenerateurAugmentant(Npair.first));     
 
-    // 2.8 Créer N items Decroissant (chiffres decroitent de 1 à 0)
-    for(auto Npair: NList)
-        for(int i=0; i<Npair.second; i++)
-            generateursEntrees.push_back(new GenerateurDecroissant(Npair.first));     
 
     /* 
         3. Éxecution des algo d'approx

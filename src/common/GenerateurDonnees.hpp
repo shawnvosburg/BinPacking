@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <string>
 #include <algorithm>
+#include <random>
 
 // Retourne un nombre aléatoire dans l'intervalle (0,1]
 float getRandomFloat() 
@@ -59,156 +60,127 @@ std::vector<float> GenerateurAleatoire::getDonnees()
 }
 
 /*  ==================================================================================
-            Données Alternant (num1 > 0.5 ensuite num2 < 0.5 ) 
+            Données NFWC (num1 = 0.5 ensuite num2 = 2/N ) 
     ==================================================================================
 */
-class GenerateurAlternant: public BaseGenerateur
+class GenerateurNFWC: public BaseGenerateur
 {
 private:
     /* data */
 public:
-    GenerateurAlternant (int N): BaseGenerateur(N) {this->nom = "Alternant";};
-    ~GenerateurAlternant()                         {this->nom = "Alternant";};
+    GenerateurNFWC (int N): BaseGenerateur(N) {this->nom = "NFWC";};
+    ~GenerateurNFWC()                         {this->nom = "NFWC";};
 
     std::vector<float> getDonnees();
 };
 
-std::vector<float> GenerateurAlternant::getDonnees()
+std::vector<float> GenerateurNFWC::getDonnees()
 {
     std::vector<float> donnees;
     for(int j = 0; j < this->N / 2; j++) 
     {
         float num1, num2;
-        num1 = (getRandomFloat() + 1) / 2;
-        num2 = 1 - num1 + std::numeric_limits<float>::epsilon();
+        num1 = 0.5;
+        num2 = 2 / this->N;
         donnees.push_back(num1);
         donnees.push_back(num2);
     }
     return donnees;
 }
-
 
 /*  ==================================================================================
-            Données GrosPetit (N/2 >= 0.5 ensuite N/2 < 0.5) 
+            Données FFWC (6M x 1/7 + eps, ensuite 6M x 1/3 + eps, ensute 6M x 1/2 + eps ) 
     ==================================================================================
 */
-class GenerateurGrosPetit: public BaseGenerateur
+class GenerateurFFWC: public BaseGenerateur
 {
 private:
     /* data */
 public:
-    GenerateurGrosPetit (int N): BaseGenerateur(N) {this->nom = "GrosPetit";};
-    ~GenerateurGrosPetit()                         {this->nom = "GrosPetit";};
+    GenerateurFFWC (int N): BaseGenerateur(N) {this->nom = "FFWC";};
+    ~GenerateurFFWC()                         {this->nom = "FFWC";};
 
     std::vector<float> getDonnees();
 };
 
-std::vector<float> GenerateurGrosPetit::getDonnees()
+std::vector<float> GenerateurFFWC::getDonnees()
 {
     std::vector<float> donnees;
-    for(int j = 0; j < this->N / 2; j++) 
+    for(int j = 0; j < this->N / 3; j++) 
     {
-        float num = (getRandomFloat() + 1) / 2;
-        donnees.push_back(num);
-    }
-    std::vector<float> donneesCopy = donnees;
-    for(auto donnee: donneesCopy) 
-    {
-        float num = 1 - donnee - std::numeric_limits<float>::epsilon();
-        donnees.push_back(num);
-    }
-    return donnees;
-}
-
-/*  =============================================================================================================
-            Données DuoOptimum (1 chiffre aléatoire, et le 4ieme = 1 - le premier chiffre) 
-            L'optimum devient alors M = N/2 nombres de conteneurs
-    =============================================================================================================
-*/
-class GenerateurDuoOptimum: public BaseGenerateur
-{
-private:
-    /* data */
-public:
-    GenerateurDuoOptimum ()                         {this->nom = "DuoOptimum";};
-    GenerateurDuoOptimum (int N): BaseGenerateur(N) {this->nom = "DuoOptimum";};
-    ~GenerateurDuoOptimum();
-
-    std::vector<float> getDonnees();
-};
-
-std::vector<float> GenerateurDuoOptimum::getDonnees()
-{
-    std::vector<float> donnees;
-    for(int j = 0; j < this->N / 2; j++) 
-    {
-        float num1 = getRandomFloat() / 2;
-        float num2 = 1 - num1 ;
+        float num1 = (1 / 7) + std::numeric_limits<float>::epsilon(); 
         donnees.push_back(num1);
-        donnees.push_back(num2);
     }
-
-    // On mélange les données pour que les 2 chiffres connectés ne sont pas immédiatement à coté.
-    std::random_shuffle(donnees.begin(), donnees.end());
-
+    for(int j = 0; j < this->N / 3; j++) 
+    {
+        float num1 = (1 / 3) + std::numeric_limits<float>::epsilon(); 
+        donnees.push_back(num1);
+    }
+    for(int j = 0; j < this->N / 3; j++) 
+    {
+        float num1 = (1 / 2) + std::numeric_limits<float>::epsilon(); 
+        donnees.push_back(num1);
+    }
     return donnees;
 }
 
-
-/*  =============================================================================================================
-            Données Augmentant (les chiffrent augemente toujours) 
-            L'optimum devient alors M = N/2 nombres de conteneurs
-    =============================================================================================================
+/*  ==================================================================================
+            Données FFDWC (Pire Exemple de First Fit Decreasing) 
+            https://en.wikipedia.org/wiki/First-fit-decreasing_bin_packing#Worst-case_example
+    ==================================================================================
 */
-class GenerateurAugmentant: public BaseGenerateur
+class GenerateurFFDWC: public BaseGenerateur
 {
 private:
     /* data */
 public:
-    GenerateurAugmentant ()                         {this->nom = "Augmentant";};
-    GenerateurAugmentant (int N): BaseGenerateur(N) {this->nom = "Augmentant";};
-    ~GenerateurAugmentant();
+    GenerateurFFDWC (int N): BaseGenerateur(N) {this->nom = "FFDWC";};
+    ~GenerateurFFDWC()                         {this->nom = "FFDWC";};
 
     std::vector<float> getDonnees();
 };
 
-std::vector<float> GenerateurAugmentant::getDonnees()
+std::vector<float> GenerateurFFDWC::getDonnees()
 {
     std::vector<float> donnees;
-    for(int j = 1; j <= this->N; j++) 
+    for(int j = 0; j < (this->N / 5) ; j++) 
     {
-        donnees.push_back(j / this->N);
+        float num;
+
+        num = (1 / 2) + std::numeric_limits<float>::epsilon(); 
+        donnees.push_back(num);
+
+        num = (1 / 4) + std::numeric_limits<float>::epsilon(); 
+        donnees.push_back(num);
+
+        num = (1 / 4) - 2 * std::numeric_limits<float>::epsilon(); 
+        donnees.push_back(num);
     }
+
+    for(int j = 0; j < (this->N / 10) ; j++) 
+    {
+        float num;
+
+        num = (1 / 4) + 2 * std::numeric_limits<float>::epsilon(); 
+        donnees.push_back(num);
+
+        num = (1 / 4) + 2 * std::numeric_limits<float>::epsilon(); 
+        donnees.push_back(num);
+
+        num = (1 / 4) - 2 * std::numeric_limits<float>::epsilon(); 
+        donnees.push_back(num);
+
+        num = (1 / 4) - 2 * std::numeric_limits<float>::epsilon(); 
+        donnees.push_back(num);
+    }
+
+    // Mélanger les données
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(donnees.begin(), donnees.end(), g);
 
     return donnees;
 }
 
-/*  =============================================================================================================
-            Données Decroissant (les chiffrent decroitrent toujours) 
-            L'optimum devient alors M = N/2 nombres de conteneurs
-    =============================================================================================================
-*/
-class GenerateurDecroissant: public BaseGenerateur
-{
-private:
-    /* data */
-public:
-    GenerateurDecroissant ()                         {this->nom = "Decroissant";};
-    GenerateurDecroissant (int N): BaseGenerateur(N) {this->nom = "Decroissant";};
-    ~GenerateurDecroissant();
-
-    std::vector<float> getDonnees();
-};
-
-std::vector<float> GenerateurDecroissant::getDonnees()
-{
-    std::vector<float> donnees;
-    for(int j = this->N; j > 0; j-- )
-    {
-        donnees.push_back(j / this->N);
-    }
-
-    return donnees;
-}
 
 
