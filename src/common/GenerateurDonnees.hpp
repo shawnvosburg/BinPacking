@@ -59,7 +59,7 @@ std::vector<float> GenerateurAleatoire::getDonnees()
 }
 
 /*  ==================================================================================
-            Données Alternant (num = 0.5 - eps ensuite num = 0.5 + 2 * eps ) 
+            Données Alternant (num1 > 0.5 ensuite num2 < 0.5 ) 
     ==================================================================================
 */
 class GenerateurAlternant: public BaseGenerateur
@@ -76,12 +76,13 @@ public:
 std::vector<float> GenerateurAlternant::getDonnees()
 {
     std::vector<float> donnees;
-    for(int j = 0; j < this->N; j++) 
+    for(int j = 0; j < this->N / 2; j++) 
     {
-        float num;
-        if (j%2 == 0) num = 0.5 - std::numeric_limits<float>::epsilon();
-        else          num = 0.5 + 2 * std::numeric_limits<float>::epsilon();
-        donnees.push_back(num);
+        float num1, num2;
+        num1 = (getRandomFloat() + 1) / 2;
+        num2 = 1 - num1 + std::numeric_limits<float>::epsilon();
+        donnees.push_back(num1);
+        donnees.push_back(num2);
     }
     return donnees;
 }
