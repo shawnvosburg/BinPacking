@@ -34,6 +34,12 @@
 #include "common/Conteneur.hpp"
 #include "algorithmes/algorithmes.hpp"
 
+// Directoire de resultats
+// Devrait être assigné par cmake.
+#ifndef RESULTS_DIR
+#define RESULTS_DIR "./"
+#endif // !RESULTS_DIR
+
 int main(int argc, const char** argv) {
     /*
         1. Initialisation
@@ -43,12 +49,12 @@ int main(int argc, const char** argv) {
 
     // Initialiser la liste contenant tous les algos
     std::vector<BaseAlgorithme*> algoList = std::vector<BaseAlgorithme*>();
-    // algoList.push_back(new FirstFit());
+    algoList.push_back(new FirstFit());
     algoList.push_back(new NextFit());
-    // algoList.push_back(new BestFit());
-    // algoList.push_back(new FirstFitDecreasing());
-    // algoList.push_back(new NextFitDecreasing());
-    // algoList.push_back(new BestFitDecreasing());
+    algoList.push_back(new BestFit());
+    algoList.push_back(new FirstFitDecreasing());
+    algoList.push_back(new NextFitDecreasing());
+    algoList.push_back(new BestFitDecreasing());
     
     /*
         2. Génération d'entrée pour les algos
@@ -57,45 +63,47 @@ int main(int argc, const char** argv) {
     // Generation de <N items, I listes d'items differents>
     std::vector<std::pair<int,int>> NList = {{180, 10000},{1800,1000},{18000,100},{180000,10}};
 
-    // // 2.1 Créer N items aléatoirement
-    // for(auto Npair: NList)
-    //     for(int i=0; i<Npair.second; i++)
-    //         generateursEntrees.push_back(new GenerateurAleatoire(Npair.first));
+    // 2.1 Créer N items aléatoirement
+    for(auto Npair: NList)
+        for(int i=0; i<Npair.second; i++)
+            generateursEntrees.push_back(new GenerateurAleatoire(Npair.first));
 
-    // // 2.2 Créer N items pour le pire cas de FirstFit
-    // for(auto Npair: NList)
-    //         generateursEntrees.push_back(new GenerateurFFWC(Npair.first));
+    // 2.2 Créer N items pour le pire cas de FirstFit
+    for(auto Npair: NList)
+            generateursEntrees.push_back(new GenerateurFFWC(Npair.first));
 
     // 2.3 Créer N items pour le pire cas de FirstFit
     for(auto Npair: NList)
             generateursEntrees.push_back(new GenerateurNFWC(Npair.first));
 
-    // // 2.4 Créer N items pour le pire cas de FirstFitDecreasing
-    // for(auto Npair: NList)
-    //     for(int i=0; i<Npair.second; i++)
-    //         generateursEntrees.push_back(new GenerateurFFDWC(Npair.first));
+    // 2.4 Créer N items pour le pire cas de FirstFitDecreasing
+    for(auto Npair: NList)
+        for(int i=0; i<Npair.second; i++)
+            generateursEntrees.push_back(new GenerateurFFDWC(Npair.first));
 
 
+    // Ouverture du fichier de sortie
+    std::string csvFichierPath = std::string(RESULTS_DIR) + "results.csv";
+    std::ofstream csvFichier(csvFichierPath);
+    bool csvHeader = false;
 
     /* 
         3. Éxecution des algo d'approx
     */
-   std::ofstream csvFichier("results.csv");
-   bool csvHeader = false;
-    for (BaseGenerateur* generateurDonnes: generateursEntrees)
+    for (BaseGenerateur* generateurDonnees: generateursEntrees)
     {
         for (auto algo: algoList )
         {
             // Initialisation
             std::vector<Conteneur*> conteneurs = std::vector<Conteneur*>();
             std::map<std::string, std::string> csvResults;
-            csvResults["N"] = std::to_string(generateurDonnes->getN());
-            csvResults["GenerateurDonnees"] = generateurDonnes->getNom();
+            csvResults["N"] = std::to_string(generateurDonnees->getN());
+            csvResults["GenerateurDonnees"] = generateurDonnees->getNom();
             csvResults["algo"] = algo->getNom();
 
             // exécution
             std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-            algo->faireBinpacking(conteneurs, generateurDonnes->getDonnees());
+            algo->faireBinpacking(conteneurs, generateurDonnees->getDonnees());
             std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
             // Obtenir des staistiques sur les résultats (mettre dans un dictionnaire)

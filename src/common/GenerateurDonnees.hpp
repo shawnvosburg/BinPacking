@@ -28,7 +28,7 @@ public:
 
     int getN() {return this->N;};
     std::string getNom() {return this->nom;};
-
+    
     virtual std::vector<float> getDonnees() = 0;
 };
 
