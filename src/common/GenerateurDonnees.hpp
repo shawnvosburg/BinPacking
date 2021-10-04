@@ -81,7 +81,7 @@ std::vector<float> GenerateurNFWC::getDonnees()
     {
         float num1, num2;
         num1 = 0.5;
-        num2 = 2 / this->N;
+        num2 = 2.0 / this->N;
         donnees.push_back(num1);
         donnees.push_back(num2);
     }
@@ -108,17 +108,17 @@ std::vector<float> GenerateurFFWC::getDonnees()
     std::vector<float> donnees;
     for(int j = 0; j < this->N / 3; j++) 
     {
-        float num1 = (1 / 7) + std::numeric_limits<float>::epsilon(); 
+        float num1 = (1.0 / 7) + std::numeric_limits<float>::epsilon(); 
         donnees.push_back(num1);
     }
     for(int j = 0; j < this->N / 3; j++) 
     {
-        float num1 = (1 / 3) + std::numeric_limits<float>::epsilon(); 
+        float num1 = (1.0 / 3) + std::numeric_limits<float>::epsilon(); 
         donnees.push_back(num1);
     }
     for(int j = 0; j < this->N / 3; j++) 
     {
-        float num1 = (1 / 2) + std::numeric_limits<float>::epsilon(); 
+        float num1 = (1.0 / 2) + std::numeric_limits<float>::epsilon(); 
         donnees.push_back(num1);
     }
     return donnees;
@@ -147,13 +147,13 @@ std::vector<float> GenerateurFFDWC::getDonnees()
     {
         float num;
 
-        num = (1 / 2) + std::numeric_limits<float>::epsilon(); 
+        num = (1.0 / 2) + std::numeric_limits<float>::epsilon(); 
         donnees.push_back(num);
 
-        num = (1 / 4) + std::numeric_limits<float>::epsilon(); 
+        num = (1.0 / 4) + std::numeric_limits<float>::epsilon(); 
         donnees.push_back(num);
 
-        num = (1 / 4) - 2 * std::numeric_limits<float>::epsilon(); 
+        num = (1.0 / 4) - 2 * std::numeric_limits<float>::epsilon(); 
         donnees.push_back(num);
     }
 
@@ -161,16 +161,16 @@ std::vector<float> GenerateurFFDWC::getDonnees()
     {
         float num;
 
-        num = (1 / 4) + 2 * std::numeric_limits<float>::epsilon(); 
+        num = (1.0 / 4) + 2 * std::numeric_limits<float>::epsilon(); 
         donnees.push_back(num);
 
-        num = (1 / 4) + 2 * std::numeric_limits<float>::epsilon(); 
+        num = (1.0 / 4) + 2 * std::numeric_limits<float>::epsilon(); 
         donnees.push_back(num);
 
-        num = (1 / 4) - 2 * std::numeric_limits<float>::epsilon(); 
+        num = (1.0 / 4) - 2 * std::numeric_limits<float>::epsilon(); 
         donnees.push_back(num);
 
-        num = (1 / 4) - 2 * std::numeric_limits<float>::epsilon(); 
+        num = (1.0 / 4) - 2 * std::numeric_limits<float>::epsilon(); 
         donnees.push_back(num);
     }
 

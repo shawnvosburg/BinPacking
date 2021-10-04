@@ -43,12 +43,12 @@ int main(int argc, const char** argv) {
 
     // Initialiser la liste contenant tous les algos
     std::vector<BaseAlgorithme*> algoList = std::vector<BaseAlgorithme*>();
-    algoList.push_back(new FirstFit());
+    // algoList.push_back(new FirstFit());
     algoList.push_back(new NextFit());
-    algoList.push_back(new BestFit());
-    algoList.push_back(new FirstFitDecreasing());
-    algoList.push_back(new NextFitDecreasing());
-    algoList.push_back(new BestFitDecreasing());
+    // algoList.push_back(new BestFit());
+    // algoList.push_back(new FirstFitDecreasing());
+    // algoList.push_back(new NextFitDecreasing());
+    // algoList.push_back(new BestFitDecreasing());
     
     /*
         2. Génération d'entrée pour les algos
@@ -57,23 +57,23 @@ int main(int argc, const char** argv) {
     // Generation de <N items, I listes d'items differents>
     std::vector<std::pair<int,int>> NList = {{180, 10000},{1800,1000},{18000,100},{180000,10}};
 
-    // 2.1 Créer N items aléatoirement
-    for(auto Npair: NList)
-        for(int i=0; i<Npair.second; i++)
-            generateursEntrees.push_back(new GenerateurAleatoire(Npair.first));
+    // // 2.1 Créer N items aléatoirement
+    // for(auto Npair: NList)
+    //     for(int i=0; i<Npair.second; i++)
+    //         generateursEntrees.push_back(new GenerateurAleatoire(Npair.first));
 
-    // 2.2 Créer N items pour le pire cas de FirstFit
-    for(auto Npair: NList)
-            generateursEntrees.push_back(new GenerateurFFWC(Npair.first));
+    // // 2.2 Créer N items pour le pire cas de FirstFit
+    // for(auto Npair: NList)
+    //         generateursEntrees.push_back(new GenerateurFFWC(Npair.first));
 
     // 2.3 Créer N items pour le pire cas de FirstFit
     for(auto Npair: NList)
             generateursEntrees.push_back(new GenerateurNFWC(Npair.first));
 
-    // 2.4 Créer N items pour le pire cas de FirstFitDecreasing
-    for(auto Npair: NList)
-        for(int i=0; i<Npair.second; i++)
-            generateursEntrees.push_back(new GenerateurFFDWC(Npair.first));
+    // // 2.4 Créer N items pour le pire cas de FirstFitDecreasing
+    // for(auto Npair: NList)
+    //     for(int i=0; i<Npair.second; i++)
+    //         generateursEntrees.push_back(new GenerateurFFDWC(Npair.first));
 
 
 
