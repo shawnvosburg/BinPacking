@@ -74,7 +74,7 @@ TEST_CASE("10 items > 0.5")
 TEST_CASE("Algorithmes fonctionnent correctement")
 {
     BaseAlgorithme* algo;
-    std::vector<float> items = {0.65, 0.7, 0.85, 0.3, 0.05};
+    std::vector<float> items = {0.13,0.41,0.22,0.61,0.03,0.57,0.68,0.78,0.81,0.99,0.91,0.19,0.12,0.34,0.27,0.48,0.59,0.19,0.01,0.85};
     std::vector<Conteneur*> sortie = std::vector<Conteneur*>();
 
     SECTION("First Fit")
@@ -85,10 +85,13 @@ TEST_CASE("Algorithmes fonctionnent correctement")
         algo->faireBinpacking(sortie, items);
 
         // Verification de la sortie
-        std::vector<float> expected = {1.0,0.7,0.85};
+        std::vector<float> expected = {0.99,1.0,0.91,0.87,0.78,0.81,0.99,0.91,0.48,0.59,0.85};
         for(int i = 0; i < expected.size(); i++)
         {
-            REQUIRE(compareFloat(sortie[i]->getTotal(), expected[i]));
+            float a = sortie[i]->getTotal();
+            float b = expected[i];
+            bool isEqual = compareFloat(a,b);
+            REQUIRE(isEqual);
         }
     }
     SECTION("Next Fit")
@@ -99,10 +102,13 @@ TEST_CASE("Algorithmes fonctionnent correctement")
         algo->faireBinpacking(sortie, items);   
 
         // Verification de la sortie
-        std::vector<float> expected = {0.65,0.7,0.85, 0.35};
+        std::vector<float> expected = {0.76,0.64,0.57,0.68,0.78,0.81,0.99,0.91,0.92,0.48,0.79,0.85};
         for(int i = 0; i < expected.size(); i++)
         {
-            REQUIRE(compareFloat(sortie[i]->getTotal(), expected[i]));
+            float a = sortie[i]->getTotal();
+            float b = expected[i];
+            bool isEqual = compareFloat(a,b);
+            REQUIRE(isEqual);
         }     
     }
     SECTION("Best Fit")
@@ -113,10 +119,13 @@ TEST_CASE("Algorithmes fonctionnent correctement")
         algo->faireBinpacking(sortie, items);
 
         // Verification de la sortie
-        std::vector<float> expected = {1.0,0.9,0.65};
+        std::vector<float> expected = {1.00,1.00,0.97,0.95,0.95,0.91,0.91,0.85,0.59,0.57,0.48};
         for(int i = 0; i < expected.size(); i++)
         {
-            REQUIRE(compareFloat(sortie[i]->getTotal(), expected[i]));
+            float a = sortie[i]->getTotal();
+            float b = expected[i];
+            bool isEqual = compareFloat(a,b);
+            REQUIRE(isEqual);
         }   
     }
     SECTION("First Fit Decreasing")
@@ -127,10 +136,13 @@ TEST_CASE("Algorithmes fonctionnent correctement")
         algo->faireBinpacking(sortie, items);    
 
         // Verification de la sortie
-        std::vector<float> expected = {0.9,1.0,0.65};
+        std::vector<float> expected = {1.0,0.94,0.98,1.0,1.0,0.95,0.95,1.0,0.88,0.48};
         for(int i = 0; i < expected.size(); i++)
         {
-            REQUIRE(compareFloat(sortie[i]->getTotal(), expected[i]));
+            float a = sortie[i]->getTotal();
+            float b = expected[i];
+            bool isEqual = compareFloat(a,b);
+            REQUIRE(isEqual);
         }    
     }
     SECTION("Best Fit Decreasing")
@@ -141,10 +153,13 @@ TEST_CASE("Algorithmes fonctionnent correctement")
         algo->faireBinpacking(sortie, items);
 
         // Verification de la sortie
-        std::vector<float> expected = {1.0,0.9,0.65};
+        std::vector<float> expected = {1.0,1.0,1.0,1.0,0.98,0.98,0.95,0.91,0.88,0.48};
         for(int i = 0; i < expected.size(); i++)
         {
-            REQUIRE(compareFloat(sortie[i]->getTotal(), expected[i]));
+            float a = sortie[i]->getTotal();
+            float b = expected[i];
+            bool isEqual = compareFloat(a,b);
+            REQUIRE(isEqual);
         }     
     }
     SECTION("Next Fit Decreasing")
@@ -155,10 +170,13 @@ TEST_CASE("Algorithmes fonctionnent correctement")
         algo->faireBinpacking(sortie, items);
 
         // Verification de la sortie
-        std::vector<float> expected = {0.85,0.7,1.0 };
+        std::vector<float> expected = {0.99,0.91,0.85,0.81,0.78,0.68,0.61,0.59,0.57,0.89,0.83,0.67};
         for(int i = 0; i < expected.size(); i++)
         {
-            REQUIRE(compareFloat(sortie[i]->getTotal(), expected[i]));
+            float a = sortie[i]->getTotal();
+            float b = expected[i];
+            bool isEqual = compareFloat(a,b);
+            REQUIRE(isEqual);
         }     
     }
 }

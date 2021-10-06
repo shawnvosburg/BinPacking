@@ -50,11 +50,11 @@ int main(int argc, const char** argv) {
     // Initialiser la liste contenant tous les algos
     std::vector<BaseAlgorithme*> algoList = std::vector<BaseAlgorithme*>();
     algoList.push_back(new FirstFit());
-    // algoList.push_back(new NextFit());
-    // algoList.push_back(new BestFit());
+    algoList.push_back(new NextFit());
+    algoList.push_back(new BestFit());
     algoList.push_back(new FirstFitDecreasing());
-    // algoList.push_back(new NextFitDecreasing());
-    // algoList.push_back(new BestFitDecreasing());
+    algoList.push_back(new NextFitDecreasing());
+    algoList.push_back(new BestFitDecreasing());
     
     /*
         2. Génération d'entrée pour les algos
