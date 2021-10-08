@@ -9,7 +9,7 @@
 
 #include <vector>
 #include <string>
-#include <common/Conteneur.hpp>
+#include <commun/Conteneur.hpp>
 
 
 class BaseAlgorithme

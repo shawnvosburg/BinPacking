@@ -29,9 +29,9 @@
 #include <chrono>
 #include <string>
 #include <algorithm>
-#include "common/json.hpp"
-#include "common/GenerateurDonnees.hpp"
-#include "common/Conteneur.hpp"
+#include <map>
+#include "commun/GenerateurDonnees.hpp"
+#include "commun/Conteneur.hpp"
 #include "algorithmes/algorithmes.hpp"
 
 // Directoire de resultats
@@ -83,7 +83,7 @@ int main(int argc, const char** argv) {
 
 
     // Ouverture du fichier de sortie
-    std::string csvFichierPath = std::string(RESULTS_DIR) + "results.csv";
+    std::string csvFichierPath = std::string(RESULTS_DIR) + "resultats.csv";
     std::ofstream csvFichier(csvFichierPath);
     bool csvHeader = false;
 

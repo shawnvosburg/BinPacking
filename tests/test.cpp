@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "catch.hpp"
 #include "algorithmes/algorithmes.hpp"
-#include "common/Conteneur.hpp"
+#include "commun/Conteneur.hpp"
 
 bool compareFloat(float a, float b )
 {

@@ -7,14 +7,14 @@ add_executable(tests
 # Lien avec les librairies
 target_link_libraries(  tests 
                         PRIVATE
-                        common
+                        commun
                         algorithmes
 )
 
 # Lien avec les dossiers de code
 target_link_directories(    tests 
                             PRIVATE
-                            common
+                            commun
                             algorithmes
 )
 
