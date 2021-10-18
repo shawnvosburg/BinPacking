@@ -61,7 +61,7 @@ int main(int argc, const char** argv) {
     */
     std::vector<BaseGenerateur*> generateursEntrees;
     // Generation de <N items, I listes d'items differents>
-    std::vector<std::pair<int,int>> NList = {{180, 10000},{1800,1000},{18000,100},{180000,10}};
+    std::vector<std::pair<int,int>> NList = {{180, 32768},{360,16384},{720,8192},{1440,4096}, {2880, 2048}, {5760,1024}};
 
     // 2.1 Créer N items aléatoirement
     for(auto Npair: NList)
