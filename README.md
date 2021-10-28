@@ -38,7 +38,7 @@ cd <project root folder> // De façon cohérente avec les étapes précédentes:
 pip install -r requirements.txt
 jupyter notebook
 ```
-5. Ensuite, ouvrir le notebook se trouvant dans le dossier analyse/. 
+5. Ensuite, ouvrir le notebook **binpacking_analyse.ipynb** se trouvant dans le dossier /analyse/. 
 6. Exécuter toutes les cellules des fichiers dans le notebook.
 
   
