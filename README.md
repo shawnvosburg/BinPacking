@@ -4,6 +4,10 @@ Par: Shawn Vosburg (shawn DOT vosburg AT usherbrooke DOT ca)
 Date: 28 octobre 2021  
 Cours: IFT800 - Algorithmique (Université de Sherbrooke)  
 
+Tout mon code C++ se trouve dans le dossier src.  
+Le point d'entrée est dans /src/main.cpp.  
+Mes tests unitaires se trouvent cependant dans /tests.  
+
 ## Comment exécuter mon projet?
 
 Voici les étapes pour exécuter mon programme sur un environnement Linux. Il est trivial de faire les même étapes sur Windows avec quelques modifications. 
