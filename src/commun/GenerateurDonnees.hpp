@@ -61,6 +61,8 @@ std::vector<float> GenerateurAleatoire::getDonnees()
 
 /*  ==================================================================================
             Données NFWC (num1 = 0.5 ensuite num2 = 2/N ) 
+            Optimalité  est quand tous les num1 sont dans N/4 conteneurs 
+                        et tous les num2 sont dans 1 conteneur.
     ==================================================================================
 */
 class GenerateurNFWC: public BaseGenerateur
@@ -127,6 +129,8 @@ std::vector<float> GenerateurFFWC::getDonnees()
 /*  ==================================================================================
             Données FFDWC (Pire Exemple de First Fit Decreasing) 
             https://en.wikipedia.org/wiki/First-fit-decreasing_bin_packing#Worst-case_example
+
+            OPT: #B1 + #B2 = (N/5) + (N/10) = (3*N)/10
     ==================================================================================
 */
 class GenerateurFFDWC: public BaseGenerateur
@@ -143,6 +147,8 @@ public:
 std::vector<float> GenerateurFFDWC::getDonnees()
 {
     std::vector<float> donnees;
+
+    // Ceci représente B1. Chaque B1 peut être pmis dans un seul conteneur
     for(int j = 0; j < (this->N / 5) ; j++) 
     {
         float num;
@@ -157,6 +163,7 @@ std::vector<float> GenerateurFFDWC::getDonnees()
         donnees.push_back(num);
     }
 
+    // Ceci représente B2. Chaque B2 peut être pmis dans un seul conteneur
     for(int j = 0; j < (this->N / 10) ; j++) 
     {
         float num;

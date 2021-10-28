@@ -42,7 +42,7 @@
 
 int main(int argc, const char** argv) {
     /*
-        1. Initialisation
+        1. Initialisation.
     */
     // Initialiser le générateur de nombre aléatoire
     std::srand(16082604); // mon matricule
