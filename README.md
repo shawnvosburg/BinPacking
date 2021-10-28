@@ -4,6 +4,10 @@ Par: Shawn Vosburg (shawn DOT vosburg AT usherbrooke DOT ca)
 Date: 28 octobre 2021  
 Cours: IFT800 - Algorithmique (Université de Sherbrooke)  
 
+Tout mon code C++ se trouve dans le dossier src.  
+Le point d'entrée est dans /src/main.cpp.  
+Mes tests unitaires se trouvent cependant dans /tests.  
+
 ## Comment exécuter mon projet?
 
 Voici les étapes pour exécuter mon programme sur un environnement Linux. Il est trivial de faire les même étapes sur Windows avec quelques modifications. 
@@ -34,7 +38,7 @@ cd <project root folder> // De façon cohérente avec les étapes précédentes:
 pip install -r requirements.txt
 jupyter notebook
 ```
-5. Ensuite, ouvrir le notebook se trouvant dans le dossier analyse/. 
+5. Ensuite, ouvrir le notebook **binpacking_analyse.ipynb** se trouvant dans le dossier /analyse/. 
 6. Exécuter toutes les cellules des fichiers dans le notebook.
 
   
