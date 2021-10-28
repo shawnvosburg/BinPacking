@@ -4,7 +4,7 @@ Par: Shawn Vosburg (shawn DOT vosburg AT usherbrooke DOT ca)
 Date: 28 octobre 2021  
 Cours: IFT800 - Algorithmique (Université de Sherbrooke)  
 
-## Comment exécuter mon programme?
+## Comment exécuter mon projet?
 
 Voici les étapes pour exécuter mon programme sur un environnement Linux. Il est trivial de faire les même étapes sur Windows avec quelques modifications. 
 
@@ -37,4 +37,6 @@ jupyter notebook
 5. Ensuite, ouvrir le notebook se trouvant dans le dossier analyse/. 
 6. Exécuter toutes les cellules des fichiers dans le notebook.
 
+  
+## Licence de librarie externe
 Bibliothèque de test: Catch2 (https://github.com/catchorg/Catch2) Boost Software Licence 1.0
